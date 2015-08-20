@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/material.min.css">
+    <script src="js/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="css/template.css">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="css/animate.css" type="text/css">
+    <title>Di Memoria?</title>
+</head>
+
+<body>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title"></span>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation. We hide it in small screens. -->
+                <nav class="mdl-navigation mdl-layout--large-screen-only">
+                    <a class="mdl-navigation__link" href=""></a>
+                    <a class="mdl-navigation__link" href=""></a>
+                    <a class="mdl-navigation__link" href=""></a>
+                    <a class="mdl-navigation__link" href=""></a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">di Memoria?</span>
+            <nav class="mdl-navigation">
+                <a id="rmAll" class="mdl-navigation__link" href="">Limpiar TODO</a>
+                <a id="about" class="mdl-navigation__link" href="">About</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="page-content">
+                <div id="notas">
+
+                </div>
+                <!-- modal form -->
+                <div id="formNota" class="novisto oculto animate">
+                    <form>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                            <input id="titulo" class="mdl-textfield__input" type="text" id="sample3" />
+                            <label class="mdl-textfield__label" for="sample3">Titulo</label>
+                        </div>
+
+                        <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                            <textarea id="contenido" class="mdl-textfield__input" type="text" rows="4"></textarea>
+                            <label class="mdl-textfield__label" for="contenido">Contenido de la nota</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                            <label>Fondo: </label>
+                            <input id="backColor" type="color" value="" />
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                            <select id="prioridad" name="prioridad">
+                                <option value="Baja">Baja</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Alta">Alta</option>
+                                <option value="A tope!">A tope!</option>
+                            </select>
+                            <label class="mdl-textfield__label" for="sample3">Prioridad</label>
+                        </div>
+                        <div class="form-footer">
+                            <button id="add" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                Añadir
+                            </button>
+                            <button id="cancel" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div id="formEdit" class="oculto">
+                    <h3>Edite su nota</h3>
+                    <form>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                            <input id="titulo-e" class="mdl-textfield__input" type="text" id="sample3" />
+                            <label class="mdl-textfield__label" for="sample3">Titulo</label>
+                        </div>
+
+                        <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                            <textarea id="contenido-e" class="mdl-textfield__input" type="text" rows="4"></textarea>
+                            <label class="mdl-textfield__label" for="contenido"></label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield textfield-demo">
+                            <label>Fondo: </label>
+                            <input id="backColor-e" type="color" value="" />
+                        </div>
+                        <div class="">
+                            <select id="prioridad-e" name="prioridad">
+                                <option value="Baja">Baja</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Alta">Alta</option>
+                                <option value="A tope!">A tope!</option>
+                            </select>
+                            <label class="" for="sample3">Prioridad</label>
+                        </div>
+                        <div class="form-footer">
+                            <button id="editar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                                Editar
+                            </button>
+                            <button id="cancelarEdit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <button id="add_button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bot-fixed">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+        </main>
+    </div>
+    <!-- Div base -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/long.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

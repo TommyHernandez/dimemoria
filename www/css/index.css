@@ -1,0 +1,51 @@
+.bot-fixed {
+    position: fixed;
+    top: 89%;
+    left: 84%;
+}
+
+.novisto {
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    margin-left: 100%;
+}
+
+.oculto {
+    display: none;
+}
+
+.tocenter {
+    margin-left: 0px;
+}
+
+.form-footer {
+    padding: 5px;
+    text-align: right;
+}
+
+#notas {
+    text-decoration: none;
+    width: 100%;
+}
+
+#notas li {
+    list-style: none;
+}
+
+#formNota form {
+    text-align: center;
+}
+
+.nota {
+    padding: 10px;
+}
+
+.nota h3 {
+    color: #FFF;
+}
+
+.desplazar {
+    margin-left: -50%;
+    transition: all 1s ease-in-out 1s;
+}
