@@ -10,17 +10,15 @@ function addStickyToDOM(key, objeto) {
     nota.setAttribute("style", "background-color:" + objeto.fondo);
     nota.setAttribute("class", "nota");
     nota.setAttribute("id", key);
-    nota.setAttribute("data-title", objeto.titulo);
-    nota.setAttribute("data-content", objeto.nota);
     span.textContent = objeto.nota;
     title.textContent = objeto.titulo;
     nota.appendChild(title);
     nota.appendChild(span);
     notas.appendChild(nota);
     /*Para poder aplicar la funcion de Jquery*/
-    $('#' + key).dblclick(editNote);
-    var pressTimer;
+    $('#' + key).on('doubletap', editNote);
     $('#' + key).longpress(menuDelete);
+
 }
 /* Creamos la nota la añadimos al LocalStorage y al dom*/
 function createSticky() {
@@ -28,7 +26,7 @@ function createSticky() {
     var titulo = document.getElementById('titulo').value;
     var fondo = document.getElementById('backColor').value;
     var prioridad = $("#prioridad").val();
-    var key = "nota_" + localStorage.length;
+    var key = "nota_" + localStorage.length * 2;
     var objeto = {
         titulo: titulo,
         nota: note,
@@ -49,11 +47,12 @@ function menuDelete() {
         localStorage.removeItem(id);
         navigator.notification.alert(
             'Se ha borrado' + id,
-            alertDismissed,
+            function () {},
             'Borrar nota',
             'OK'
         );
-
+        // navigator.notification.beep(2);
+        location.reload(true);
         destroyDOM();
         loadDOM();
     }
@@ -61,8 +60,11 @@ function menuDelete() {
 
 function editNote() {
     var id = this.id;
-    $('#titulo-e').val($("#" + id).data('title'));
-    $('#contenido-e').val($("#" + id).data('content'));
+    var value = localStorage.getItem(id);
+    var objeto = JSON.parse(value);
+    $('#titulo-e').val(objeto.titulo);
+    $('#contenido-e').val(objeto.nota);
+    $('#backColor-e').val(objeto.fondo);
     formEditNota();
     $("#editar").on('click', function () {
         var note = document.getElementById("contenido-e").value;
@@ -82,29 +84,19 @@ function editNote() {
 }
 /* El dialogo para los valores de la nota*/
 function dialogNota() {
-    var formulario = document.getElementById('formNota');
-    formulario.classList.remove('oculto');
-    formulario.classList.add('tocenter');
-    $('#formNota').addClass('animated slideInUp');
+    $('#formNota').slideDown();
 }
 
 function formEditNota() {
-    var formulario = document.getElementById('formEdit');
-    formulario.classList.remove('oculto');
-    formulario.classList.add('tocenter');
-    $('#formEdit').addClass('animated slideInUp');
+    $('#formEdit').show();
 }
 // Cerrar el formulario de editar y añadir
 function dismisForm() {
-    $('#formNota').addClass('animated slideOutDown');
-    $('#formNota').removeClass('tocenter');
-    $('#formNota').addClass('oculto');
+    $('#formNota').hide();
 }
 
 function cerrarFormEdit() {
-    $('#formEdit').addClass('animated slideOutDown');
-    $('#formEdit').removeClass('tocenter');
-    $('#formEdit').addClass('oculto');
+    $('#formEdit').hide();
 }
 /*Funcion que elimina todas las notas del Storage, tras hacerlo reinicia el DOM*/
 function clearStorage() {
@@ -115,7 +107,7 @@ function clearStorage() {
 function aboutDialog() {
     navigator.notification.alert(
         "Di memoria Desarrollado por Pedro Tomás Hernández",
-        alertDismissed,
+        function () {},
         "Sobre la app",
         "Moola"
     );
@@ -144,6 +136,8 @@ function destroyDOM() {
 //Fin funciones DOM
 //Funcion inicial para cuando el dom este listo
 function init() {
+    $('#formNota').hide();
+    $('#formEdit').hide();
     /*Escuchadores y sus funciones asociadas*/
     document.addEventListener('deviceready', onDeviceReady, false);
     var button = document.getElementById("add_button").addEventListener("click", dialogNota);

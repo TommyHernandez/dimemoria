@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="css/material.min.css">
     <script src="js/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" href="css/index.css" type="text/css">
-    <link rel="stylesheet" href="css/animate.css" type="text/css">
     <title>Di Memoria?</title>
 </head>
 
@@ -45,7 +45,8 @@
 
                 </div>
                 <!-- modal form -->
-                <div id="formNota" class="novisto oculto animate">
+                <div id="formNota" class="form">
+                    <h3>Nota</h3>
                     <form>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
                             <input id="titulo" class="mdl-textfield__input" type="text" id="sample3" />
@@ -60,12 +61,12 @@
                             <label>Fondo: </label>
                             <input id="backColor" type="color" value="" />
                         </div>
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                        <div class="">
                             <select id="prioridad" name="prioridad">
-                                <option value="Baja">Baja</option>
-                                <option value="Normal">Normal</option>
-                                <option value="Alta">Alta</option>
-                                <option value="A tope!">A tope!</option>
+                                <option value="Baja">Baja <span class="color green"></span></option>
+                                <option value="Normal">Normal <span class="color grey"></span> </option>
+                                <option value="Alta">Alta <span class="color pink"></span> </option>
+                                <option value="A tope!">A tope! <span class="color red"></span> </option>
                             </select>
                             <label class="mdl-textfield__label" for="sample3">Prioridad</label>
                         </div>
@@ -79,7 +80,7 @@
                         </div>
                     </form>
                 </div>
-                <div id="formEdit" class="oculto">
+                <div id="formEdit" class="form">
                     <h3>Edite su nota</h3>
                     <form>
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
@@ -97,10 +98,10 @@
                         </div>
                         <div class="">
                             <select id="prioridad-e" name="prioridad">
-                                <option value="Baja">Baja</option>
-                                <option value="Normal">Normal</option>
-                                <option value="Alta">Alta</option>
-                                <option value="A tope!">A tope!</option>
+                                <option class="green" value="Baja">Baja <span class="color green"></span></option>
+                                <option class="grey" value="Normal">Normal <span class="color grey"></span> </option>
+                                <option class="pink" value="Alta">Alta <span class="color pink"></span> </option>
+                                <option class="red" value="A tope!">A tope! <span class="color red"></span> </option>
                             </select>
                             <label class="" for="sample3">Prioridad</label>
                         </div>

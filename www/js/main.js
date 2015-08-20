@@ -1,3 +1,16 @@
+/**
+ * di memoria its a simple webapp developed using Cordova take notes with custom color and priority
+ * 
+ * @name di memoria?
+ * @version 0.5
+ * @requires jQuery v1.2.3+
+ * @author Pedro Tomás Hernández
+ * @license MIT License - http://www.opensource.org/licenses/mit-license.php
+ *
+ * http://github.com/
+ *
+ * Copyright (c) 2015, Pedro T. Hernandez (http://pthernandes.es
+ */
 /*
  * En esta funcion le pasamos la key del locals storage, el titulo de la nota y su contenido para crear los nodos del dom
  */
@@ -6,21 +19,23 @@ function addStickyToDOM(key, objeto) {
     var nota = document.createElement("div");
     var title = document.createElement("h3");
     var span = document.createElement("span");
+    var prior = document.createElement("span");
     var footer = document.createElement("div");
+    // prior.classList.add(comprobarPrioridad(objeto.prioridad));
+    prior.classList.add(comprobarPrioridad("prioridad green"));
     nota.setAttribute("style", "background-color:" + objeto.fondo);
     nota.setAttribute("class", "nota");
     nota.setAttribute("id", key);
-    nota.setAttribute("data-title", objeto.titulo);
-    nota.setAttribute("data-content", objeto.nota);
     span.textContent = objeto.nota;
     title.textContent = objeto.titulo;
     nota.appendChild(title);
     nota.appendChild(span);
+    nota.appendChild(prior);
     notas.appendChild(nota);
     /*Para poder aplicar la funcion de Jquery*/
     $('#' + key).on('doubletap', editNote);
-    var pressTimer;
     $('#' + key).longpress(menuDelete);
+
 }
 /* Creamos la nota la añadimos al LocalStorage y al dom*/
 function createSticky() {
@@ -28,7 +43,7 @@ function createSticky() {
     var titulo = document.getElementById('titulo').value;
     var fondo = document.getElementById('backColor').value;
     var prioridad = $("#prioridad").val();
-    var key = "nota_" + localStorage.length;
+    var key = "nota_" + localStorage.length * 2;
     var objeto = {
         titulo: titulo,
         nota: note,
@@ -49,11 +64,12 @@ function menuDelete() {
         localStorage.removeItem(id);
         navigator.notification.alert(
             'Se ha borrado' + id,
-            alertDismissed,
+            function () {},
             'Borrar nota',
             'OK'
         );
-
+        // navigator.notification.beep(2);
+        location.reload(true);
         destroyDOM();
         loadDOM();
     }
@@ -61,8 +77,11 @@ function menuDelete() {
 
 function editNote() {
     var id = this.id;
-    $('#titulo-e').val($("#" + id).data('title'));
-    $('#contenido-e').val($("#" + id).data('content'));
+    var value = localStorage.getItem(id);
+    var objeto = JSON.parse(value);
+    $('#titulo-e').val(objeto.titulo);
+    $('#contenido-e').val(objeto.nota);
+    $('#backColor-e').val(objeto.fondo);
     formEditNota();
     $("#editar").on('click', function () {
         var note = document.getElementById("contenido-e").value;
@@ -82,29 +101,19 @@ function editNote() {
 }
 /* El dialogo para los valores de la nota*/
 function dialogNota() {
-    var formulario = document.getElementById('formNota');
-    formulario.classList.remove('oculto');
-    formulario.classList.add('tocenter');
-    $('#formNota').addClass('animated slideInUp');
+    $('#formNota').slideDown();
 }
 
 function formEditNota() {
-    var formulario = document.getElementById('formEdit');
-    formulario.classList.remove('oculto');
-    formulario.classList.add('tocenter');
-    $('#formEdit').addClass('animated slideInUp');
+    $('#formEdit').show();
 }
 // Cerrar el formulario de editar y añadir
 function dismisForm() {
-    $('#formNota').addClass('animated slideOutDown');
-    $('#formNota').removeClass('tocenter');
-    $('#formNota').addClass('oculto');
+    $('#formNota').hide();
 }
 
 function cerrarFormEdit() {
-    $('#formEdit').addClass('animated slideOutDown');
-    $('#formEdit').removeClass('tocenter');
-    $('#formEdit').addClass('oculto');
+    $('#formEdit').hide();
 }
 /*Funcion que elimina todas las notas del Storage, tras hacerlo reinicia el DOM*/
 function clearStorage() {
@@ -115,7 +124,7 @@ function clearStorage() {
 function aboutDialog() {
     navigator.notification.alert(
         "Di memoria Desarrollado por Pedro Tomás Hernández",
-        alertDismissed,
+        function () {},
         "Sobre la app",
         "Moola"
     );
@@ -142,8 +151,21 @@ function destroyDOM() {
     document.getElementById('notas').innerHTML = "";
 }
 //Fin funciones DOM
+/*
+ * Este metodo comprieba la prioridad de la nota y nos devuelve el conjuntonde clases
+ */
+function comprobarPrioridad(prioridad) {
+    switch (prioridad) {
+
+    case Baja:
+        return "prioridad green"
+        break;
+    }
+}
 //Funcion inicial para cuando el dom este listo
 function init() {
+    $('#formNota').hide();
+    $('#formEdit').hide();
     /*Escuchadores y sus funciones asociadas*/
     document.addEventListener('deviceready', onDeviceReady, false);
     var button = document.getElementById("add_button").addEventListener("click", dialogNota);
