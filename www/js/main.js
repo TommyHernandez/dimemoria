@@ -22,7 +22,8 @@ function addStickyToDOM(key, objeto) {
     var prior = document.createElement("span");
     var footer = document.createElement("div");
     // prior.classList.add(comprobarPrioridad(objeto.prioridad));
-    prior.classList.add(comprobarPrioridad("prioridad green"));
+    prior.classList.add("prioridad");
+    prior.classList.add("green");
     nota.setAttribute("style", "background-color:" + objeto.fondo);
     nota.setAttribute("class", "nota");
     nota.setAttribute("id", key);
@@ -154,14 +155,14 @@ function destroyDOM() {
 /*
  * Este metodo comprieba la prioridad de la nota y nos devuelve el conjuntonde clases
  */
-function comprobarPrioridad(prioridad) {
+/*function comprobarPrioridad(prioridad) {
     switch (prioridad) {
 
-    case Baja:
+    case "Baja":
         return "prioridad green"
         break;
     }
-}
+}*/
 //Funcion inicial para cuando el dom este listo
 function init() {
     $('#formNota').hide();
