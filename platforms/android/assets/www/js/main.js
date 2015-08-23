@@ -1,3 +1,16 @@
+/**
+ * di memoria its a simple webapp developed using Cordova take notes with custom color and priority
+ * 
+ * @name di memoria?
+ * @version 0.5
+ * @requires jQuery v1.2.3+
+ * @author Pedro Tomás Hernández
+ * @license MIT License - http://www.opensource.org/licenses/mit-license.php
+ *
+ * http://github.com/
+ *
+ * Copyright (c) 2015, Pedro T. Hernandez (http://pthernandes.es
+ */
 /*
  * En esta funcion le pasamos la key del locals storage, el titulo de la nota y su contenido para crear los nodos del dom
  */
@@ -6,7 +19,11 @@ function addStickyToDOM(key, objeto) {
     var nota = document.createElement("div");
     var title = document.createElement("h3");
     var span = document.createElement("span");
+    var prior = document.createElement("span");
     var footer = document.createElement("div");
+    // prior.classList.add(comprobarPrioridad(objeto.prioridad));
+    prior.classList.add("prioridad");
+    prior.classList.add("green");
     nota.setAttribute("style", "background-color:" + objeto.fondo);
     nota.setAttribute("class", "nota");
     nota.setAttribute("id", key);
@@ -14,6 +31,7 @@ function addStickyToDOM(key, objeto) {
     title.textContent = objeto.titulo;
     nota.appendChild(title);
     nota.appendChild(span);
+    nota.appendChild(prior);
     notas.appendChild(nota);
     /*Para poder aplicar la funcion de Jquery*/
     $('#' + key).on('doubletap', editNote);
@@ -134,6 +152,17 @@ function destroyDOM() {
     document.getElementById('notas').innerHTML = "";
 }
 //Fin funciones DOM
+/*
+ * Este metodo comprieba la prioridad de la nota y nos devuelve el conjuntonde clases
+ */
+/*function comprobarPrioridad(prioridad) {
+    switch (prioridad) {
+
+    case "Baja":
+        return "prioridad green"
+        break;
+    }
+}*/
 //Funcion inicial para cuando el dom este listo
 function init() {
     $('#formNota').hide();

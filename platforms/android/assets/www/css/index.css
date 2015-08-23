@@ -57,6 +57,14 @@ h3 {
     height: 32px;
 }
 
+.prioridad {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 5px;
+    height: 100%;
+}
+
 .red {
     background-color: #C62828;
 }

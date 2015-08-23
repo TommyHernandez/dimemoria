@@ -3,23 +3,23 @@
  * 
  * @name di memoria?
  * @version 0.5
- * @requires jQuery v1.2.3+
+ * @requires jQuery v2.1.4+
  * @author Pedro Tomás Hernández
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  *
  * http://github.com/
  *
- * Copyright (c) 2015, Pedro T. Hernandez (http://pthernandes.es
+ * Copyright (c) 2015, Pedro T. Hernandez (http://pthernandes.es)
  */
 /*
- * En esta funcion le pasamos la key del locals storage, el titulo de la nota y su contenido para crear los nodos del dom
+ * Recibe la clave que tiene en el localStorege y el objetod e la nota recueparado, la funcion lo añade al listado de notas
  */
 function addStickyToDOM(key, objeto) {
     var notas = document.getElementById("notas");
     var nota = document.createElement("div");
     var title = document.createElement("h3");
     var span = document.createElement("span");
-    var prior = document.createElement("span");
+    var prior = document.createElement("div");
     var footer = document.createElement("div");
     // prior.classList.add(comprobarPrioridad(objeto.prioridad));
     prior.classList.add("prioridad");
