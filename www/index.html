@@ -11,7 +11,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/template.css">
     <link rel="stylesheet" href="css/index.css" type="text/css">
-    <title>Di Memoria?</title>
+    <title>Di Memoria</title>
 </head>
 
 <body>
@@ -33,23 +33,30 @@
             </div>
         </header>
         <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">di Memoria?</span>
+            <span class="mdl-layout-title">DiMemoria</span>
             <nav class="mdl-navigation">
-                <a id="rmAll" class="mdl-navigation__link" href="">Limpiar Notas</a>
+                <a id="rmAll" class="mdl-navigation__link" href="">Limpiar notas</a>
                 <a id="about" class="mdl-navigation__link" href="">About</a>
+                <a id="tuto" class="mdl-navigation__link" href="">Mostrar tutorial</a>
             </nav>
         </div>
         <main class="mdl-layout__content">
             <div class="page-content">
                 <div id="notas" role="main">
-                    <div style="background-color:aqua;" class="nota">
+                    <div id="tutorial" style="background-color:aqua;" class="nota">
                         <h3>Tutorial</h3>
+                        <h4>Bienvenido a dimemoria</h4>
+                        <img src="img/logo.png" alt="Imagen dimemoria" />
                         <ul>
                             <li>Manten pulsado para eliminar una nota</li>
                             <li>Haz doble toque para modificar una nota</li>
                             <li> Colores de priopridad:
                                 <ul>
-                                    <li>Rojo -> A tope</li>
+                                    <li>Azul -> Trivial<span class="color blue"></span></li>
+                                    <li>Verde -> Baja <span class="color green"></span></li>
+                                    <li>Gris -> Normal <span class="color grey"></span></li>
+                                    <li>Rosa -> Alta <span class="color orange"></span></li>
+                                    <li>Rojo -> A tope <span class="color red"></span> </li>
 
                                 </ul>
                             </li>
@@ -70,17 +77,20 @@
                             <label class="mdl-textfield__label" for="contenido">Contenido de la nota</label>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield textfield-demo">
-                            <label>Fondo: </label>
-                            <input id="backColor" type="color" value="" />
+                            <label class="mdl-textfield__label">Fondo: </label>
+                            <input id="backColor" type="color" value="#333" />
+
                         </div>
-                        <div class="">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                            <label class="mdl-textfield__label">Prioridad</label>
                             <select id="prioridad" name="prioridad">
-                                <option value="Baja">Baja <span class="color green"></span></option>
-                                <option value="Normal">Normal <span class="color grey"></span> </option>
-                                <option value="Alta">Alta <span class="color pink"></span> </option>
-                                <option value="A tope!">A tope! <span class="color red"></span> </option>
+                                <option value="#">Sin Prioridad</option>
+                                <option value="trivial">Trivial</option>
+                                <option value="baja">Baja</option>
+                                <option value="normal">Normal</option>
+                                <option value="alta">Alta</option>
+                                <option value="a tope">A tope</option>
                             </select>
-                            <label class="mdl-textfield__label" for="sample3">Prioridad</label>
                         </div>
                         <div class="form-footer">
                             <button id="add" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
@@ -108,14 +118,16 @@
                             <label>Fondo: </label>
                             <input id="backColor-e" type="color" value="" />
                         </div>
-                        <div class="">
-                            <select id="prioridad-e" name="prioridad">
-                                <option class="green" value="Baja">Baja <span class="color green"></span></option>
-                                <option class="grey" value="Normal">Normal <span class="color grey"></span> </option>
-                                <option class="pink" value="Alta">Alta <span class="color pink"></span> </option>
-                                <option class="red" value="A tope!">A tope! <span class="color red"></span> </option>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+                            <label class="mdl-textfield__label" for="sample3">Prioridad</label>
+                            <select id="prioridad" name="prioridad">
+                                <option value="#">Sin Prioridad</option>
+                                <option value="trivial">Trivial</option>
+                                <option value="baja">Baja</option>
+                                <option value="normal">Normal</option>
+                                <option value="alta">Alta</option>
+                                <option value="a tope">A tope</option>
                             </select>
-                            <label class="" for="sample3">Prioridad</label>
                         </div>
                         <div class="form-footer">
                             <button id="editar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">

@@ -1,30 +1,34 @@
 /**
  * di memoria its a simple webapp developed using Cordova take notes with custom color and priority
  * 
- * @name di memoria?
+ * @name dimemoria
  * @version 0.5
- * @requires jQuery v1.2.3+
+ * @requires jQuery v2.1.4+
  * @author Pedro Tomás Hernández
  * @license MIT License - http://www.opensource.org/licenses/mit-license.php
  *
  * http://github.com/
  *
- * Copyright (c) 2015, Pedro T. Hernandez (http://pthernandes.es
+ * Copyright (c) 2015, Pedro T. Hernandez (http://pthernandes.es)
  */
 /*
- * En esta funcion le pasamos la key del locals storage, el titulo de la nota y su contenido para crear los nodos del dom
+ * Recibe la clave que tiene en el localStorege y el objetod e la nota recueparado, la funcion lo añade al listado de notas
  */
 function addStickyToDOM(key, objeto) {
     var notas = document.getElementById("notas");
     var nota = document.createElement("div");
     var title = document.createElement("h3");
     var span = document.createElement("span");
-    var prior = document.createElement("span");
+    var prior = document.createElement("div");
     var footer = document.createElement("div");
-    // prior.classList.add(comprobarPrioridad(objeto.prioridad));
-    prior.classList.add("prioridad");
-    prior.classList.add("green");
+    prior.setAttribute("class", comprobarPrioridad(objeto.prioridad));
+    /* En caso de que el fondo sea negro pondremos la letra en color blanco, esto va a haber que pulirlo...*/
     nota.setAttribute("style", "background-color:" + objeto.fondo);
+    if (objeto.fondo == "#000000" || objeto.fondo == "#111111") {
+        span.classList.add("letra-w");
+    } else if (objeto.fondo == "#333333" || objeto.fondo == "#555555") {
+        span.classList.add("letra-w");
+    }
     nota.setAttribute("class", "nota");
     nota.setAttribute("id", key);
     span.textContent = objeto.nota;
@@ -61,7 +65,7 @@ function onDeviceReady() {
 /*Selección Edicion o borrado*/
 function menuDelete() {
     var id = $(this).attr('id');
-    if (confirm("Quieres Eliminar realmenta la" + id + "?")) {
+    if (confirm("¿Quieres eliminar realmenta la " + id + "?")) {
         localStorage.removeItem(id);
         navigator.notification.alert(
             'Se ha borrado' + id,
@@ -69,7 +73,7 @@ function menuDelete() {
             'Borrar nota',
             'OK'
         );
-        // navigator.notification.beep(2);
+        navigator.notification.beep(1);
         location.reload(true);
         destroyDOM();
         loadDOM();
@@ -117,14 +121,18 @@ function cerrarFormEdit() {
     $('#formEdit').hide();
 }
 /*Funcion que elimina todas las notas del Storage, tras hacerlo reinicia el DOM*/
+
+
 function clearStorage() {
-    localStorage.clear();
-    destroyDOM(); // borra el DOM
+    if (confirm("Se eliminarán todas las notas ¿Estas seguro?")) {
+        localStorage.clear();
+        destroyDOM(); // borra el DOM
+    }
 }
 /* navigator alert para el About*/
 function aboutDialog() {
     navigator.notification.alert(
-        "Di memoria Desarrollado por Pedro Tomás Hernández",
+        "Di memoria Desarrollado por Pedro Tomás Hernández   Logotipo by Mockva",
         function () {},
         "Sobre la app",
         "Moola"
@@ -154,17 +162,52 @@ function destroyDOM() {
 //Fin funciones DOM
 /*
  * Este metodo comprieba la prioridad de la nota y nos devuelve el conjuntonde clases
+Baja
+Normal
+Alta
+A tope
  */
-/*function comprobarPrioridad(prioridad) {
+function comprobarPrioridad(prioridad) {
     switch (prioridad) {
 
-    case "Baja":
-        return "prioridad green"
+    case "baja":
+        return "prioridad green";
         break;
+    case "normal":
+        return "prioridad grey";
+        break;
+    case "alta":
+        return "prioridad orange";
+        break;
+
+    case "a tope":
+        return "prioridad red"
+        break;
+    case "trivial":
+        return "prioridad blue";
+        break;
+
     }
-}*/
+}
+
+function archivar() {
+    if (confirm("Esta nota se va a archivar y podra verla accediendo al menu lateral")) {
+        $(this).addClass('oculto');
+        localStorage.setItem("tutorial", 1);
+
+    }
+}
 //Funcion inicial para cuando el dom este listo
 function init() {
+    $("#tutorial").on('click', archivar);
+    $('#tuto').on('click', function () {
+        $("#tutorial").removeClass('oculto');
+        localStorage.setItem("tutorial", 0);
+    });
+    /*Comprovamos si el tutorial esta archivado*/
+    if (localStorage.getItem("tutorial") == 1) {
+        $("#tutorial").addClass('oculto');
+    }
     $('#formNota').hide();
     $('#formEdit').hide();
     /*Escuchadores y sus funciones asociadas*/

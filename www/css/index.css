@@ -1,5 +1,8 @@
+/*Tipografias*/
+
+@import url(http://fonts.googleapis.com/css?family=Rosario);
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rosario', sans-serif;
 }
 
 h3 {
@@ -67,12 +70,16 @@ h3 {
     margin-right: -10px;
 }
 
+.oculto {
+    display: none;
+}
+
 .red {
     background-color: #C62828;
 }
 
-.pink {
-    background-color: #AD1457;
+.orange {
+    background-color: #fcab12;
 }
 
 .grey {
@@ -85,4 +92,8 @@ h3 {
 
 .green {
     background-color: #558B2F;
+}
+
+.letra-w {
+    color: #FFF;
 }

@@ -1,5 +1,8 @@
+/*Tipografias*/
+
+@import url(http://fonts.googleapis.com/css?family=Rosario);
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rosario', sans-serif;
 }
 
 h3 {
@@ -28,7 +31,7 @@ h3 {
 }
 
 #notas {
-    text-decoration: none;
+    overflow: hidden;
     width: 100%;
     height: 100%;
 }
@@ -40,6 +43,7 @@ h3 {
 .nota {
     height: 25%;
     padding: 10px;
+    overflow: hidden;
 }
 
 .nota h3 {
@@ -58,19 +62,24 @@ h3 {
 }
 
 .prioridad {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 5px;
-    height: 100%;
+    width: 110%;
+    height: 15px;
+    overflow: hidden;
+    margin-left: -10px;
+    margin-bottom: -10px;
+    margin-right: -10px;
+}
+
+.oculto {
+    display: none;
 }
 
 .red {
     background-color: #C62828;
 }
 
-.pink {
-    background-color: #AD1457;
+.orange {
+    background-color: #fcab12;
 }
 
 .grey {
@@ -83,4 +92,8 @@ h3 {
 
 .green {
     background-color: #558B2F;
+}
+
+.letra-w {
+    color: #FFF;
 }
