@@ -10,6 +10,12 @@ h3 {
     font-weight: 700;
 }
 
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #000;
+}
+
 .bot-fixed {
     position: fixed;
     top: 89%;
@@ -72,28 +78,41 @@ h3 {
 
 .oculto {
     display: none;
+    visibility: hidden;
 }
 
 .red {
-    background-color: #C62828;
+    background-color: #E53935;
 }
 
 .orange {
-    background-color: #fcab12;
+    background-color: #FB8C00;
 }
 
 .grey {
-    background-color: #424242;
+    background-color: #757575;
 }
 
 .blue {
-    background-color: #0277BD;
+    background-color: #1E88E5;
 }
 
 .green {
-    background-color: #558B2F;
+    background-color: #7CB342;
 }
 
 .letra-w {
     color: #FFF;
+}
+
+.letra-b {
+    color: #222;
+}
+
+#tutorial {
+    background-color: #00ACC1;
+}
+
+#tutorial img {
+    margin-left: 16%;
 }

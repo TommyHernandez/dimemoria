@@ -17,7 +17,12 @@
 function addStickyToDOM(key, objeto) {
     var notas = document.getElementById("notas");
     var nota = document.createElement("div");
-    var title = document.createElement("h3");
+    /*En caso de que el fondo sea Blanco o muy claro el titulo debera de aparecer en negro o en gris oscuro, esto tambien hay que pulirlo*/
+    if (objeto.fondo == "#ffffff" || objeto.fondo == "#eeeeee" || objeto.fondo == "#fffffe" || objeto.fondo == "#fffefe") {
+        var title = document.createElement("h2");
+    } else {
+        var title = document.createElement("h3");
+    }
     var span = document.createElement("span");
     var prior = document.createElement("div");
     var footer = document.createElement("div");
@@ -29,6 +34,12 @@ function addStickyToDOM(key, objeto) {
     } else if (objeto.fondo == "#333333" || objeto.fondo == "#555555") {
         span.classList.add("letra-w");
     }
+    /*En caso de que el fondo sea Blanco o muy claro el titulo debera de aparecer en negro o en gris oscuro, esto tambien hay que pulirlo*/
+    if (objeto.fondo == "#FFFFFF" || objeto.fondo == "#EEEEEE") {
+
+    } else if (objeto.fondo == "#FFFFFE" || objeto.fondo == "#FFEEEE") {
+
+    } // fin if
     nota.setAttribute("class", "nota");
     nota.setAttribute("id", key);
     span.textContent = objeto.nota;
@@ -39,6 +50,7 @@ function addStickyToDOM(key, objeto) {
     notas.appendChild(nota);
     /*Para poder aplicar la funcion de Jquery*/
     $('#' + key).on('doubletap', editNote);
+    $('#' + key).dblclick(editNote);
     $('#' + key).longpress(menuDelete);
 
 }
@@ -73,7 +85,6 @@ function menuDelete() {
             'Borrar nota',
             'OK'
         );
-        navigator.notification.beep(1);
         location.reload(true);
         destroyDOM();
         loadDOM();
@@ -87,6 +98,7 @@ function editNote() {
     $('#titulo-e').val(objeto.titulo);
     $('#contenido-e').val(objeto.nota);
     $('#backColor-e').val(objeto.fondo);
+    $("#prioridad-e").val(objeto.prioridad);
     formEditNota();
     $("#editar").on('click', function () {
         var note = document.getElementById("contenido-e").value;
@@ -147,11 +159,12 @@ function loadDOM() {
     if (localStorage.length != 0) {
         //Leemos localStorage siempre que no este vacio parsearemos el objeto JSON
         for (var i = 0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            var value = localStorage.getItem(key);
-            var objeto = JSON.parse(value);
-            addStickyToDOM(key, objeto);
-
+            if (localStorage.key(i).substring(0, 4) == "nota") {
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                var objeto = JSON.parse(value);
+                addStickyToDOM(key, objeto);
+            }
         }
     }
 }
@@ -189,35 +202,39 @@ function comprobarPrioridad(prioridad) {
 
     }
 }
-
+/*Funciones para archivar, en prioncipio solo se va a guardar el tutorial, y no se guarda en realidad*/
 function archivar() {
-    if (confirm("Esta nota se va a archivar y podra verla accediendo al menu lateral")) {
-        $(this).addClass('oculto');
+    if (confirm("Esta nota se va a archivar y podrá verla accediendo al menú lateral")) {
+        $('#tutorial').addClass('oculto');
         localStorage.setItem("tutorial", 1);
-
     }
 }
+
+function desarchivar() {
+    $("#tutorial").removeClass('oculto');
+    localStorage.setItem("tutorial", 0);
+}
+//
 //Funcion inicial para cuando el dom este listo
 function init() {
-    $("#tutorial").on('click', archivar);
-    $('#tuto').on('click', function () {
-        $("#tutorial").removeClass('oculto');
-        localStorage.setItem("tutorial", 0);
-    });
+    $('#tuto').on('click', desarchivar);
     /*Comprovamos si el tutorial esta archivado*/
     if (localStorage.getItem("tutorial") == 1) {
         $("#tutorial").addClass('oculto');
+
+    } else {
+        $("#tutorial").on('click', archivar);
     }
     $('#formNota').hide();
     $('#formEdit').hide();
     /*Escuchadores y sus funciones asociadas*/
     document.addEventListener('deviceready', onDeviceReady, false);
-    var button = document.getElementById("add_button").addEventListener("click", dialogNota);
-    document.getElementById('rmAll').addEventListener("click", clearStorage);
+    var button = document.getElementById("add_button").addEventListener("click", dialogNota, false);
+    document.getElementById('rmAll').addEventListener("click", clearStorage, false);
     //Botones del formulario de añadir
     document.getElementById("add").addEventListener("click", createSticky);
-    document.getElementById("cancel").addEventListener("click", dismisForm);
-    document.getElementById('about').addEventListener('click', aboutDialog);
+    document.getElementById("cancel").addEventListener("click", dismisForm, false);
+    document.getElementById('about').addEventListener('click', aboutDialog, false);
     $("#cancelarEdit").on('click', cerrarFormEdit);
     //Cargamos notas al dom si storage != 0
     loadDOM();
